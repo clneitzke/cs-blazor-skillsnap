@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using SkillSnap.Api.Models;
+using SkillSnap.Shared.Models;
 
-namespace SkillSnap.Api;
+namespace SkillSnap.Api.Data;
 
 public class SkillSnapContext : DbContext
 {

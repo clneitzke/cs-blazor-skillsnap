@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SkillSnap.Api.Models;
+namespace SkillSnap.Shared.Models;
 
 
 public class Skill
@@ -11,5 +12,7 @@ public class Skill
     public string Level { get; set; }
 
     public int PortfolioUserId { get; set; }
+    
+    [ForeignKey("PortfolioUserId")]
     public PortfolioUser PortfolioUser { get; set; }
 }

@@ -11,4 +11,12 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.4" PrivateAssets="all"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SkillSnap.Shared\SkillSnap.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Pages\Components\ProfileCard.razor" />
+    </ItemGroup>
+
 </Project>

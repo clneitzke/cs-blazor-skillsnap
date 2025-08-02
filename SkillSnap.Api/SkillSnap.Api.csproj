@@ -16,4 +16,8 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.7" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SkillSnap.Shared\SkillSnap.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

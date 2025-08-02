@@ -1,0 +1,17 @@
+@* ProfileCard.razor *@
+<div class="profile-card">
+    <img src="@ProfilePictureUrl" alt="Profile picture" class="profile-picture" />
+    <h2>@Name</h2>
+    <p>@Bio</p>
+</div>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Bio { get; set; }
+
+    [Parameter]
+    public string ProfilePictureUrl { get; set; }
+}
