@@ -1,4 +1,4 @@
-namespace SkillSnap.Client;
+namespace SkillSnap.Client.Services;
 
 public class SkillService
 {
