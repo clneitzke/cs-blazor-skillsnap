@@ -11,20 +11,15 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<SkillSnapContext>(options =>
     options.UseSqlite("Data Source=skillsnap.db"));
 
-// Run EF Core commands:dotnet ef migrations add InitialCreate
-// dotnet ef database update
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowClient", policy =>
     {
-        policy.WithOrigins()
+        policy.WithOrigins("http://localhost:5226")
             .AllowAnyMethod()
             .AllowAnyHeader();
     });
 });
-
-
 
 var app = builder.Build();
 

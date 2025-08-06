@@ -6,5 +6,10 @@ Accept: application/json
 
 ###
 
-GET {{SkillSnap_Api_HostAddress}}/api/Projects/
+GET {{SkillSnap_Api_HostAddress}}/api/projects/
+Accept: application/json
+
+###
+
+GET {{SkillSnap_Api_HostAddress}}/api/skills/
 Accept: application/json

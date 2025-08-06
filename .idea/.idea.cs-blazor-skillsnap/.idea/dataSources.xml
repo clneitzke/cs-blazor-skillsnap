@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="skillsnap" uuid="59cd2339-bf42-40f1-9a6a-28f5422f5178">
-      <driver-ref>sqlite.xerial</driver-ref>
+      <driver-ref>0c73358d-a583-44e7-bcac-766cd581dce4</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/SkillSnap.Api/skillsnap.db</jdbc-url>

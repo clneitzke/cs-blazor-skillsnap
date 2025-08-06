@@ -1,45 +1,28 @@
-@* SkillSnap.Client/Pages/ProjectList.razor *@
-@page "/project-list"
+@page "/"
+@inject ProjectService ProjectService
 
-<h3>Portfolio Users</h3>
-<ul>
-    @foreach (var user in PortfolioUsers)
-    {
-        <li>@user.Name</li>
-    }
-</ul>
 
 <h3>Projects</h3>
-<ul>
-    @foreach (var project in Projects)
-    {
-        <li>@project.Title (User: @PortfolioUsers.FirstOrDefault(u => u.Id == project.PortfolioUserId)?.Name)</li>
-    }
-</ul>
+
+@if (_projects != null)
+{
+    <ul>
+        @foreach (var project in _projects)
+        {
+            <li>@project.Title</li>
+        }
+    </ul>
+}
+else
+{
+    <b>Loading</b>
+}
 
 @code {
-    public class PortfolioUser
+    private List<Project>? _projects;
+
+    protected override async Task OnInitializedAsync()
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        _projects = await ProjectService.GetProjectsAsync();
     }
-
-    public class Project
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public int PortfolioUserId { get; set; }
-    }
-
-    List<PortfolioUser> PortfolioUsers = new()
-    {
-        new PortfolioUser { Id = 1, Name = "Alice" },
-        new PortfolioUser { Id = 2, Name = "Bob" }
-    };
-
-    List<Project> Projects = new()
-    {
-        new Project { Id = 1, Title = "Website Redesign", PortfolioUserId = 1 },
-        new Project { Id = 2, Title = "Mobile App", PortfolioUserId = 2 }
-    };
 }
