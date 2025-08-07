@@ -1,15 +1,46 @@
 @SkillSnap_Api_HostAddress = http://localhost:5057
 
+### Seed Data
 
 POST {{SkillSnap_Api_HostAddress}}/api/seed/
 Accept: application/json
 
-###
+### Seed Roles
+
+GET {{SkillSnap_Api_HostAddress}}/api/seed/create-roles
+Accept: application/json
+
+### Projects
 
 GET {{SkillSnap_Api_HostAddress}}/api/projects/
 Accept: application/json
 
-###
+### Skills
 
-GET {{SkillSnap_Api_HostAddress}}/api/skills/
+GET {{SkillSnap_Api_HostAddress}}/api/Skills/
 Accept: application/json
+
+### PortfolioUser
+
+GET {{SkillSnap_Api_HostAddress}}/api/portfoliouser/
+Accept: application/json
+
+### Create User Application   
+POST {{SkillSnap_Api_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "cleber",   
+    "email": "cleber@teste.com",
+    "password": "Test@1234"
+}
+
+### Create Admin Application   
+POST {{SkillSnap_Api_HostAddress}}/api/auth/registeradmin
+Content-Type: application/json
+
+{
+  "username": "adm",
+  "email": "cleber@teste.com",
+  "password": "Test@1234"
+}

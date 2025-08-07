@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SkillSnap.Shared.Models;
 
@@ -10,6 +11,9 @@ public class PortfolioUser
     public string Bio { get; set; }
     public string ProfileImageUrl { get; set; }
 
+    [InverseProperty("PortfolioUser")]
     public List<Project> Projects { get; set; } = new List<Project>();
+    
+    [InverseProperty("PortfolioUser")]
     public List<Skill> Skills { get; set; } = new List<Skill>();
 }

@@ -1,6 +1,8 @@
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SkillSnap.Api.Data;
+using SkillSnap.Api.Models;
 using SkillSnap.Shared.Models;
 
 namespace SkillSnap.Api.Controllers
@@ -9,11 +11,18 @@ namespace SkillSnap.Api.Controllers
     [Route("api/[controller]")]
     public class SeedController : ControllerBase
     {
+        
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SkillSnapContext _context;
-        public SeedController(SkillSnapContext context)
+        
+        public SeedController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SkillSnapContext context)
         {
+            _userManager = userManager;
+            _roleManager = roleManager;
             _context = context;
         }
+
         [HttpPost]
         public IActionResult Seed()
         {
@@ -40,6 +49,22 @@ namespace SkillSnap.Api.Controllers
             _context.PortfolioUsers.Add(user);
             _context.SaveChanges();
             return Ok("Sample data inserted.");
+        }
+        
+        [HttpGet("create-roles")]
+        public async Task<IActionResult> CreateRoles()
+        {
+            string[] roles = new[] { "User", "Admin" };
+
+            foreach (var role in roles)
+            {
+                if (!await _roleManager.RoleExistsAsync(role))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(role));
+                }
+            }
+
+            return Ok("Roles created");
         }
     }
 }

@@ -6,28 +6,19 @@ namespace SkillSnap.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProjectsController : ControllerBase
+public class ProjectsController(SkillSnapContext context) : ControllerBase
 {
-    private readonly SkillSnapContext _context;
-
-    public ProjectsController(SkillSnapContext context)
-    {
-        _context = context;
-    }
-
-    // GET: api/Projects
     [HttpGet]
     public ActionResult<IEnumerable<Project>> GetProjects()
     {
-        return Ok(_context.Projects.ToList());
+        return Ok(context.Projects.ToList());
     }
 
-    // POST: api/Projects
     [HttpPost]
     public ActionResult<Project> AddProject(Project project)
     {
-        _context.Projects.Add(project);
-        _context.SaveChanges();
+        context.Projects.Add(project);
+        context.SaveChanges();
         return CreatedAtAction(nameof(GetProjects), new { id = project.Id }, project);
     }
 }
