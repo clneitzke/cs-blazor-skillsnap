@@ -3,18 +3,40 @@ using SkillSnap.Shared.Models;
 
 namespace SkillSnap.Client.Services
 {
-    public class SkillService(HttpClient httpClient)
+    public class SkillService
     {
-        private const string ApiUrl = "http://localhost:5057/api/skills";
+        private readonly HttpClient _http;
 
-        public async Task<List<Skill>> GetProjectsAsync()
+        public SkillService(HttpClient http)
         {
-            return await httpClient.GetFromJsonAsync<List<Skill>>(ApiUrl);
+            _http = http;
         }
 
-        public async Task AddProjectAsync(Skill newSkill)
+        // Fetch all skills from API
+        public async Task<List<Skill>> GetSkillsAsync()
         {
-            await httpClient.PostAsJsonAsync(ApiUrl, newSkill);
+            try
+            {
+                return await _http.GetFromJsonAsync<List<Skill>>("api/skills") ?? new();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[SkillService] Error: {ex.Message}");
+                return new List<Skill>();
+            }
+        }
+
+        // Add a new skill via POST
+        public async Task AddSkillAsync(Skill newSkill)
+        {
+            try
+            {
+                await _http.PostAsJsonAsync("api/skills", newSkill);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[SkillService] Error: {ex.Message}");
+            }
         }
     }
 }

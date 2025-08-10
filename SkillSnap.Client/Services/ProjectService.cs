@@ -3,18 +3,40 @@ using SkillSnap.Shared.Models;
 
 namespace SkillSnap.Client.Services
 {
-    public class ProjectService(HttpClient httpClient)
+    public class ProjectService
     {
-        private const string ApiUrl = "http://localhost:5057/api/projects";
+        private readonly HttpClient _http;
 
-        public async Task<List<Project>?> GetProjectsAsync()
+        public ProjectService(HttpClient http)
         {
-            return await httpClient.GetFromJsonAsync<List<Project>>(ApiUrl);
+            _http = http;
         }
 
+        // Fetch all projects from API
+        public async Task<List<Project>> GetProjectsAsync()
+        {
+            try
+            {
+                return await _http.GetFromJsonAsync<List<Project>>("api/projects") ?? new();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ProjectService] Error: {ex.Message}");
+                return new List<Project>();
+            }
+        }
+
+        // Add a new project via POST
         public async Task AddProjectAsync(Project newProject)
         {
-            await httpClient.PostAsJsonAsync(ApiUrl, newProject);
+            try
+            {
+                await _http.PostAsJsonAsync("api/projects", newProject);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ProjectService] Error: {ex.Message}");
+            }
         }
     }
 }
